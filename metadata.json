@@ -1,0 +1,6 @@
+{
+  "name": "Sinau AI",
+  "description": "Gamified AI study platform with Google Auth, real-time progress tracking, visual roadmaps, SRS flashcards, and a Pomodoro focus system with XP/level rewards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Stores user progress, XP, and preferences",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "xp": { "type": "number" },
+        "level": { "type": "number" },
+        "studyTimeSeconds": { "type": "number" },
+        "dailyStreak": { "type": "number" },
+        "lastActive": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "xp", "level"]
+    },
+    "StudyPack": {
+      "title": "Study Pack",
+      "description": "A generated package of study materials",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "topic": { "type": "string" },
+        "detailedExplanation": { "type": "string" },
+        "eli5": { "type": "string" },
+        "summary": { "type": "array" },
+        "roadmap": { "type": "array" },
+        "flashcards": { "type": "array" },
+        "quiz": { "type": "array" },
+        "unlockedLevel": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "topic", "roadmap"]
+    },
+    "StudySession": {
+      "title": "Study Session",
+      "description": "Log of a study session (Pomodoro)",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "topic": { "type": "string" },
+        "duration": { "type": "number" },
+        "type": { "type": "string", "enum": ["pomodoro", "short_break", "long_break"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile and stats"
+    },
+    "/studyPacks/{packId}": {
+      "schema": "StudyPack",
+      "description": "Collection of generated study materials"
+    },
+    "/users/{userId}/sessions/{sessionId}": {
+      "schema": "StudySession",
+      "description": "Study logs per user"
+    }
+  }
+}
